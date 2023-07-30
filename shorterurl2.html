@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Shortener</title>
+</head>
+<body>
+    <div id="login-container">
+        <h2>Login</h2>
+        <form onsubmit="login(event)">
+            <label for="username">Username:</label>
+            <input type="text" id="username" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" required><br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <div id="shortener" style="display: none;">
+        <h2>URL Shortener</h2>
+        <label for="longUrl">Long URL:</label>
+        <input type="text" id="longUrl" placeholder="Enter long URL"><br>
+        <label for="shortUrl">Short URL:</label>
+        <input type="text" id="shortUrl" placeholder="Enter desired short URL"><br>
+        <button onclick="shorten()">Shorten</button>
+        <p>Shortened URL: <a id="finalShortUrl" target="_blank"></a></p>
+    </div>
+
+    <script>
+        let loggedIn = false;
+
+        function login(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // username login : rivan
+			// pass : rivan123
+            if (username === "rivan" && password === "rivan123") {
+                loggedIn = true;
+                document.getElementById("login-container").style.display = "none";
+                document.getElementById("shortener").style.display = "block";
+            } else {
+                alert("Invalid username or password. Please try again.");
+            }
+        }
+
+        function shorten() {
+            if (!loggedIn) {
+                alert("Please log in first.");
+                return;
+            }
+
+            const longUrl = document.getElementById("longUrl").value;
+            const shortUrl = document.getElementById("shortUrl").value;
+
+            if (longUrl.trim() === "" || shortUrl.trim() === "") {
+                alert("Please enter both the long URL and the desired short URL.");
+                return;
+            }
+
+            const finalShortUrl = `http://<your_web_domain>/${shortUrl}`;
+            
+            document.getElementById("finalShortUrl").innerText = finalShortUrl;
+            document.getElementById("finalShortUrl").href = finalShortUrl;
+        }
+    </script>
+</body>
+</html>
